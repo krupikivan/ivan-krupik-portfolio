@@ -175,14 +175,59 @@ function showNotification(message, type = 'info') {
     }, 5000);
 }
 
-// Typing animation for hero title
+// Typing animation for hero title - FIXED VERSION
 function typeWriter(element, text, speed = 100) {
+    // Create a temporary div to parse the HTML
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = text;
+    
+    // Extract parts: before highlight, highlight text, after highlight
+    const span = tempDiv.querySelector('span.highlight');
+    if (!span) {
+        // If no highlight span, just type the text normally
+        const textContent = tempDiv.textContent || tempDiv.innerText || '';
+        element.innerHTML = '';
+        typeText(element, textContent, speed);
+        return;
+    }
+    
+    const beforeText = tempDiv.childNodes[0] ? tempDiv.childNodes[0].textContent : '';
+    const highlightText = span.textContent;
+    const afterText = tempDiv.childNodes[2] ? tempDiv.childNodes[2].textContent : '';
+    
     let i = 0;
+    const fullText = beforeText + highlightText + afterText;
+    
     element.innerHTML = '';
     
     function type() {
-        if (i < text.length) {
-            element.innerHTML += text.charAt(i);
+        if (i < fullText.length) {
+            const currentChar = fullText.charAt(i);
+            
+            // Determine which part we're in
+            if (i < beforeText.length) {
+                // Before highlight
+                element.innerHTML += currentChar;
+            } else if (i < beforeText.length + highlightText.length) {
+                // In highlight - need to build the span
+                if (i === beforeText.length) {
+                    // Start of highlight
+                    element.innerHTML += '<span class="highlight">' + currentChar;
+                } else {
+                    // Continue highlight
+                    const span = element.querySelector('.highlight');
+                    span.textContent += currentChar;
+                }
+                
+                // Close span if we're at the end of highlight
+                if (i === beforeText.length + highlightText.length - 1) {
+                    element.innerHTML = element.innerHTML.replace('</span>', '') + '</span>';
+                }
+            } else {
+                // After highlight
+                element.innerHTML += currentChar;
+            }
+            
             i++;
             setTimeout(type, speed);
         }
@@ -191,17 +236,16 @@ function typeWriter(element, text, speed = 100) {
     type();
 }
 
+
 // Initialize typing animation when page loads
 document.addEventListener('DOMContentLoaded', () => {
     const heroTitle = document.querySelector('.hero-title');
     if (heroTitle) {
         const originalText = heroTitle.innerHTML;
-        setTimeout(() => {
-            typeWriter(heroTitle, originalText, 50);
-        }, 500);
+        // Disable typing animation to prevent HTML rendering issues
+        typeWriter(heroTitle, originalText, 50);
     }
 });
-
 // Parallax effect for hero section
 window.addEventListener('scroll', () => {
     const scrolled = window.pageYOffset;

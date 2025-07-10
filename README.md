@@ -61,13 +61,24 @@ A professional portfolio website showcasing my experience as a Senior Software E
 
 ## 🚀 Getting Started
 
+### Local Development
+
 1. Clone the repository:
 ```bash
 git clone https://github.com/krupikivan/portfolio.git
+cd portfolio
 ```
 
-2. Open `index.html` in your browser or serve with a local server:
+2. Install dependencies (optional):
 ```bash
+npm install
+```
+
+3. Start local development server:
+```bash
+# Using npm script
+npm start
+
 # Using Python
 python -m http.server 8000
 
@@ -75,12 +86,58 @@ python -m http.server 8000
 npx serve .
 ```
 
-3. Visit `http://localhost:8000` to view the portfolio
+4. Visit `http://localhost:8000` to view the portfolio
+
+### Deployment
+
+This portfolio is automatically deployed to GitHub Pages using GitHub Actions:
+
+1. **Automatic Deployment**: Every push to the `main` branch triggers automatic deployment
+2. **GitHub Pages**: Site is available at `https://krupikivan.github.io/portfolio`
+3. **CI/CD Pipeline**: Includes code quality checks and validation
+
+#### Manual Deployment Setup
+
+1. Enable GitHub Pages in repository settings:
+   - Go to Settings → Pages
+   - Source: GitHub Actions
+   - The workflow will handle the rest automatically
+
+2. Push to main branch:
+```bash
+git add .
+git commit -m "Deploy portfolio"
+git push origin main
+```
+
+## 🔧 Development Workflow
+
+### GitHub Actions Workflows
+
+1. **Deploy Workflow** (`.github/workflows/deploy.yml`):
+   - Triggers on push to main branch
+   - Builds and deploys to GitHub Pages
+   - Automatic deployment with zero configuration
+
+2. **CI Workflow** (`.github/workflows/ci.yml`):
+   - Runs on all pushes and pull requests
+   - Validates HTML, CSS, and JavaScript
+   - Checks file structure and accessibility
+
+### Available Scripts
+
+```bash
+npm start       # Start local development server
+npm run serve   # Alternative local server
+npm run build   # No build required (static site)
+npm test        # Run tests
+npm run lint    # Run linting
+```
 
 ## 📧 Contact
 
 - **Email**: krupikivan@gmail.com
-- **Phone**: +1 (437) 988-8888
+- **Phone**: +1 (786) 770-0263
 - **LinkedIn**: [linkedin.com/in/krupikivan](https://linkedin.com/in/krupikivan)
 - **GitHub**: [github.com/krupikivan](https://github.com/krupikivan)
 
@@ -88,6 +145,8 @@ npx serve .
 
 This project is open source and available under the [MIT License](LICENSE).
 
+## 🚀 Live Demo
 ---
 
+Visit the live portfolio at: [https://krupikivan.github.io/portfolio](https://krupikivan.github.io/portfolio)
 Built with ❤️ by Ivan Krupik

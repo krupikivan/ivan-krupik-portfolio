@@ -69,29 +69,37 @@ git clone https://github.com/krupikivan/portfolio.git
 cd portfolio
 ```
 
-2. Install dependencies (optional):
+2. Install dependencies:
 ```bash
-npm install
+npm ci
 ```
 
-3. Start local development server:
+3. Set up environment variables:
 ```bash
-# Using npm script
-npm start
-
-# Using Python
-python -m http.server 8000
-
-# Using Node.js
-npx serve .
+cp .env.example .env
+# Edit .env with your EmailJS credentials
 ```
 
-4. Visit `http://localhost:8000` to view the portfolio
+4. Start development server:
+```bash
+npm run dev
+```
+
+5. Build for production:
+```bash
+npm run build
+```
+
+6. Preview production build:
+```bash
+npm run preview
+```
 
 ### Deployment
 
-This portfolio is automatically deployed to GitHub Pages using GitHub Actions:
+#### Environment Variables Setup
 
+Before deploying, you need to set up EmailJS environment variables in your GitHub repository:
 1. **Automatic Deployment**: Every push to the `main` branch triggers automatic deployment
 2. **GitHub Pages**: Site is available at `https://krupikivan.github.io/portfolio`
 3. **CI/CD Pipeline**: Includes code quality checks and validation

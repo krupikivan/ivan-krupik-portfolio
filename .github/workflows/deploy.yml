@@ -3,8 +3,6 @@ name: Deploy Portfolio to GitHub Pages
 on:
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
@@ -26,17 +24,29 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          
+      - name: Install dependencies
+        run: npm ci
+        
+      - name: Build React app
+        env:
+          VITE_REACT_APP_EMAILJS_PUBLIC_KEY: ${{ secrets.VITE_REACT_APP_EMAILJS_PUBLIC_KEY }}
+          VITE_REACT_APP_EMAILJS_SERVICE_ID: ${{ secrets.VITE_REACT_APP_EMAILJS_SERVICE_ID }}
+          VITE_REACT_APP_EMAILJS_TEMPLATE_ID: ${{ secrets.VITE_REACT_APP_EMAILJS_TEMPLATE_ID }}
+        run: npm run build
+        
       - name: Setup Pages
         uses: actions/configure-pages@v4
         
-      - name: Build with Jekyll
-        uses: actions/jekyll-build-pages@v1
-        with:
-          source: ./
-          destination: ./_site
-          
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
 
   # Deployment job
   deploy:

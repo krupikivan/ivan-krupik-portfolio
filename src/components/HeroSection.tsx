@@ -71,6 +71,14 @@ const HeroSection: React.FC<HeroSectionProps> = ({ scrollToSection }) => {
               >
                 Get In Touch
               </button>
+              <a
+                href="https://krupikivan.github.io/resume/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-8 py-3 border-2 border-blue-600 text-blue-600 dark:text-blue-400 dark:border-blue-400 rounded-lg font-semibold hover:bg-blue-600 hover:text-white dark:hover:bg-blue-400 dark:hover:text-slate-900 transition-colors text-center"
+              >
+                View Resume
+              </a>
               <button
                 onClick={() => scrollToSection("experience")}
                 className="px-8 py-3 border-2 border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 rounded-lg font-semibold hover:border-blue-600 hover:text-blue-600 transition-colors"

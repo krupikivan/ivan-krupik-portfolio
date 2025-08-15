@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Mail, Phone, Linkedin, Github } from "lucide-react";
+import { Mail, Phone, Linkedin, Github, FileText } from "lucide-react";
 import emailjs from "@emailjs/browser";
 import type { FormData, SubmitStatus, ContactMethod } from "../types";
 
@@ -65,6 +65,11 @@ const ContactSection: React.FC = () => {
       icon: <Phone className="w-5 h-5" />,
       label: "+1 (786) 770-0263",
       href: "tel:+17867700263",
+    },
+    {
+      icon: <FileText className="w-5 h-5" />,
+      label: "Download Resume",
+      href: "https://krupikivan.github.io/resume/",
     },
     {
       icon: <Linkedin className="w-5 h-5" />,
